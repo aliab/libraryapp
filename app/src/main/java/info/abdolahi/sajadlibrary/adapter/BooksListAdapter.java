@@ -48,7 +48,8 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.Book
 
     @Override
     public int getItemCount() {
-        return mData.size();
+
+        return (mData != null) ? mData.size() : 0;
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
@@ -64,6 +65,11 @@ public class BooksListAdapter extends RecyclerView.Adapter<BooksListAdapter.Book
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
     /**

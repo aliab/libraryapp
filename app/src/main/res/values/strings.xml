@@ -1,6 +1,21 @@
 <resources>
-    <string name="app_name">Sajad Library</string>
+    <string name="app_name">کتابخانه سجاد</string>
+    <string name="app_version">نسخه ۱.۰.۰</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_aboutus">درباره سازنده</string>
+    <string name="action_search">جستجو</string>
+    <string name="action_favorites">علاقه مندی ها</string>
+
+    <string name="dialog_sarshenase">سرشناسه: </string>
+    <string name="dialog_publisher">ناشر: </string>
+    <string name="dialog_motarjem">مترجم: </string>
+    <string name="dialog_saleenteshar">سال انتشار: </string>
+
+    <string name="save_tofaved">اضافه به علاقه مندی ها</string>
+    <string name="removed_fromfaved">حذف از علاقه مندی ها</string>
+    <string name="okay">باشه</string>
+    <string name="book_faved">کتاب مورد نظر شما به علاقه مندی ها اضافه شد</string>
+    <string name="book_removed_faved">کتاب مورد نظر شما از علاقه مندی ها حذف شد</string>
+
+
 </resources>

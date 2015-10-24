@@ -44,7 +44,7 @@ public class TextCellDataSource {
      * @return
      */
     public List<BookModel> findAllTitle() {
-
+        open();
         Cursor cursor = database.rawQuery("select * from books order by _id",
                 null);
 
@@ -61,7 +61,7 @@ public class TextCellDataSource {
      * @return
      */
     public List<CategoryModel> findAllCategory() {
-
+        open();
         Cursor cursor = database.rawQuery("select * from categories order by _id",
                 null);
 
@@ -78,7 +78,7 @@ public class TextCellDataSource {
      * @return
      */
     public List<BookModel> findAllPublisherBooks(String publisher) {
-
+        open();
         Cursor cursor = database.rawQuery("select * from books WHERE " + DataBaseHelper.PUBLISHER + "=" + publisher + " order by _id",
                 null);
 
@@ -95,6 +95,7 @@ public class TextCellDataSource {
      * @return
      */
     public List<BookModel> findAllfaved() {
+        open();
         Cursor cursor = database.rawQuery(
                 "select * from books WHERE is_faved = 1 order by _id", null);
         MTools.mlog("Returned " + cursor.getCount() + " rows.");
@@ -112,8 +113,8 @@ public class TextCellDataSource {
      * @param fields
      * @return
      */
-    public List<BookModel> searchInDB(String title, List<SearchModel> fields) {
-
+    public List<BookModel> searchInDB(List<SearchModel> fields) {
+        open();
         StringBuilder sb = new StringBuilder();
         sb.append("select * from books WHERE ");
         for (int i = 0; i < fields.size(); i++) {
@@ -129,14 +130,42 @@ public class TextCellDataSource {
         return books;
     }
 
+    /**
+     * get list pair list of fieldsName/fieldsValue to search in db
+     *
+     * @param title
+     * @param fields
+     * @return
+     */
+    public List<BookModel> searchInFavoriteDB(List<SearchModel> fields) {
+        open();
+        StringBuilder sb = new StringBuilder();
+        sb.append("select * from books WHERE ");
+        for (int i = 0; i < fields.size(); i++) {
+            sb.append(fields.get(i).fieldName + " LIKE '%" + fields.get(i).fieldValue + "%' ");
+            if (fields.size() > 0 && i < (fields.size() - 1)) {
+                sb.append(" AND ");
+            }
+        }
+        sb.append(" AND is_faved = 1 order by _id");
+
+        Cursor cursor = database.rawQuery(sb.toString(), null);
+        MTools.mlog("Returned " + cursor.getCount() + " rows.");
+        List<BookModel> books = DataBaseHelper.returnBooksList(cursor);
+        close();
+        cursor.close();
+        return books;
+    }
+
 
     /**
      * find one book with specifc id
+     *
      * @param id
      * @return
      */
     public BookModel findBook(int id) {
-
+        open();
         Cursor cursor = database.rawQuery("select * from books where _id=" + id,
                 null);
 
@@ -160,10 +189,12 @@ public class TextCellDataSource {
 
     /**
      * favorite book
+     *
      * @param id
      * @return
      */
     public Boolean set_fav(int id) {
+        open();
         database.execSQL("UPDATE books SET is_faved=1 WHERE _id=" + id);
         close();
         return true;
@@ -171,10 +202,12 @@ public class TextCellDataSource {
 
     /**
      * remove books from faved list
+     *
      * @param id
      * @return
      */
     public Boolean remove_faved(int id) {
+        open();
         database.execSQL("UPDATE books SET is_faved=0 WHERE _id=" + id);
         close();
         return true;

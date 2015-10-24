@@ -1,6 +1,8 @@
 package info.abdolahi.sajadlibrary.db;
 
-public class BookModel {
+import java.io.Serializable;
+
+public class BookModel implements Serializable{
 
     private int id, category_id, is_faved;
     private String sarsehnase, title, publisher, motarjem, publish_year;
