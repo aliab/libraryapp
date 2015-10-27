@@ -1,14 +1,12 @@
-# libraryapp
-This is just a simple demo of library open source application with live search feature and SQLite support.
+# Library Application
+This is just a simple demo of a library application with live search feature and SQLite support.
 
 you can see demo at:
 [Google Play](https://play.google.com/store/apps/details?id=info.abdolahi.libraryapp)
 
 #Screenshot
 
-![Preview](https://raw.githubusercontent.com/aliab/libraryapp/master/art/shots0.jpg)
-![Preview](https://raw.githubusercontent.com/aliab/libraryapp/master/art/shots1.jpg)
-![Preview](https://raw.githubusercontent.com/aliab/libraryapp/master/art/shots2.jpg)
+![Preview](https://dl.dropboxusercontent.com/u/34047574/github/librarydemo/shots0.jpg)
 
 License
 -------
