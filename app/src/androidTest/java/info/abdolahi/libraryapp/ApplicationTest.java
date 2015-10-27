@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary;
+package info.abdolahi.libraryapp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

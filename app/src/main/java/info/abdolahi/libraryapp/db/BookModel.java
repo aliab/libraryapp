@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary.db;
+package info.abdolahi.libraryapp.db;
 
 import java.io.Serializable;
 

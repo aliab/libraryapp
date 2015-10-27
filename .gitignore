@@ -23,6 +23,9 @@ gen/
 .gradle/
 build/
 
+# keystore file
+keystore/
+
 # Local configuration file (sdk path, etc)
 local.properties
 

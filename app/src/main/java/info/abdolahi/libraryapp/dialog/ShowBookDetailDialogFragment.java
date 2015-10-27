@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary.dialog;
+package info.abdolahi.libraryapp.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import info.abdolahi.sajadlibrary.R;
-import info.abdolahi.sajadlibrary.db.BookModel;
+import info.abdolahi.libraryapp.R;
+import info.abdolahi.libraryapp.db.BookModel;
 
 public class ShowBookDetailDialogFragment extends DialogFragment {
 

@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary.activity;
+package info.abdolahi.libraryapp.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.flurry.android.FlurryAgent;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.io.IOException;
@@ -25,13 +24,13 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import info.abdolahi.sajadlibrary.R;
-import info.abdolahi.sajadlibrary.adapter.BooksListAdapter;
-import info.abdolahi.sajadlibrary.db.BookModel;
-import info.abdolahi.sajadlibrary.db.DataBaseHelper;
-import info.abdolahi.sajadlibrary.db.SearchModel;
-import info.abdolahi.sajadlibrary.db.TextCellDataSource;
-import info.abdolahi.sajadlibrary.dialog.ShowBookDetailDialogFragment;
+import info.abdolahi.libraryapp.R;
+import info.abdolahi.libraryapp.adapter.BooksListAdapter;
+import info.abdolahi.libraryapp.db.BookModel;
+import info.abdolahi.libraryapp.db.DataBaseHelper;
+import info.abdolahi.libraryapp.db.SearchModel;
+import info.abdolahi.libraryapp.db.TextCellDataSource;
+import info.abdolahi.libraryapp.dialog.ShowBookDetailDialogFragment;
 
 public class MainActivity extends AppCompatActivity implements BooksListAdapter.OnRecyclerViewItemClickListener, ShowBookDetailDialogFragment.faveMeDialogListener {
 
@@ -74,6 +73,33 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
         init_view();
     }
 
+    private void getDefaultDisplayData(boolean withRefresh) {
+
+        if (!isFavedIntent) {
+            mData = dataSource.findAllTitle();
+        } else {
+            mData = dataSource.findAllfaved();
+        }
+
+        if (withRefresh) {
+            mAdapter.notifyDataSetChanged();
+            displayList();
+        }
+    }
+
+    private void getDefaultDisplayData(List<SearchModel> searchModels, boolean withRefresh) {
+
+        if (isFavedIntent) {
+            mData = dataSource.searchInFavoriteDB(searchModels);
+        } else {
+            mData = dataSource.searchInDB(searchModels);
+        }
+        if (withRefresh) {
+            mAdapter.notifyDataSetChanged();
+            displayList();
+        }
+    }
+
 
     private void checkAdapterIsEmpty() {
         if (mAdapter.getItemCount() == 0) {
@@ -81,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
         } else {
             listEmpty.setVisibility(View.GONE);
         }
+
     }
 
     /**
@@ -118,14 +145,7 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
                 searchModel.setFieldName(DataBaseHelper.TITLE);
                 searchModel.setFieldValue(newText);
                 searchModels.add(searchModel);
-
-                if (isFavedIntent) {
-                    mData = dataSource.searchInFavoriteDB(searchModels);
-                } else {
-                    mData = dataSource.searchInDB(searchModels);
-                }
-                mAdapter.notifyDataSetChanged();
-                displayList();
+                getDefaultDisplayData(searchModels, true);
                 return true;
             }
         });
@@ -186,11 +206,7 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
 
         dataSource = new TextCellDataSource(this);
 
-        if (!isFavedIntent) {
-            mData = dataSource.findAllTitle();
-        } else {
-            mData = dataSource.findAllfaved();
-        }
+        getDefaultDisplayData(false);
     }
 
     @Override
@@ -227,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
             sb.append("\n");
             sb.append("پاییز ۱۳۹۴");
 
-            dialog.setMessage(sb.toString());
+            dialog.setMessage(getString(R.string.about_dialog));
             dialog.setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -251,11 +267,7 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1001) {
-            if (!isFavedIntent) {
-                mData = dataSource.findAllTitle();
-                mAdapter.notifyDataSetChanged();
-                displayList();
-            }
+            getDefaultDisplayData(true);
         }
     }
 
@@ -287,27 +299,9 @@ public class MainActivity extends AppCompatActivity implements BooksListAdapter.
             dataSource.remove_faved(id);
             msg = getString(R.string.book_removed_faved);
         }
-
-        if (isFavedIntent) {
-            mData = dataSource.findAllfaved();
-        } else {
-            mData = dataSource.findAllTitle();
-        }
-        mAdapter.notifyDataSetChanged();
-        displayList();
+        getDefaultDisplayData(true);
         Snackbar.make(container, msg, Snackbar.LENGTH_SHORT).show();
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FlurryAgent.onStartSession(this);
-    }
-
-    @Override
-    protected void onStop() {
-        FlurryAgent.onEndSession(this);
-        super.onStop();
-    }
 }

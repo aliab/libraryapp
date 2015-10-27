@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary.db;
+package info.abdolahi.libraryapp.db;
 
 /**
  * Created by aliabdolahi on 10/24/15 AD.

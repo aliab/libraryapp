@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">کتابخانه سجاد</string>
+    <string name="app_name">دمو کتابخانه</string>
     <string name="app_version">نسخه ۱.۰.۰</string>
 
     <string name="action_aboutus">درباره سازنده</string>
@@ -16,6 +16,14 @@
     <string name="okay">باشه</string>
     <string name="book_faved">کتاب مورد نظر شما به علاقه مندی ها اضافه شد</string>
     <string name="book_removed_faved">کتاب مورد نظر شما از علاقه مندی ها حذف شد</string>
-
+    <string name="about_dialog">
+        نرم افزار متن باز دمو برای یک کتاب خانه
+        \n
+        اطلاعات این نرم افزار صرفا به طور آزمایش از فایل اکسل یک کتابخانه که برای عموم روی وب سایتش بود تهیه شده است
+        \n
+        برای دسترسی به سورس کد به آدرس زیر بروید:
+        \n
+        http://github.com/aliab/libraryapp
+    </string>
 
 </resources>

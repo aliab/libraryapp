@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary.adapter;
+package info.abdolahi.libraryapp.adapter;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +11,8 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import info.abdolahi.sajadlibrary.R;
-import info.abdolahi.sajadlibrary.db.BookModel;
+import info.abdolahi.libraryapp.R;
+import info.abdolahi.libraryapp.db.BookModel;
 
 /**
  * Created by aliabdolahi on 10/24/15 AD.

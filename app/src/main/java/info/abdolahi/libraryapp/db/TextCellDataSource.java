@@ -1,4 +1,4 @@
-package info.abdolahi.sajadlibrary.db;
+package info.abdolahi.libraryapp.db;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.IOException;
 import java.util.List;
 
-import info.abdolahi.sajadlibrary.utils.MTools;
 
 public class TextCellDataSource {
 
@@ -29,17 +28,15 @@ public class TextCellDataSource {
         }
 
         database = DataBaseHelper.getDatabase();
-        MTools.mlog("Database opened");
     }
 
     public void close() {
         dbhelper.close();
         database.close();
-        MTools.mlog("Database closed");
     }
 
     /**
-     * get all books object
+     * get all books object by its title
      *
      * @return
      */
@@ -48,7 +45,6 @@ public class TextCellDataSource {
         Cursor cursor = database.rawQuery("select * from books order by _id",
                 null);
 
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
         List<BookModel> books = DataBaseHelper.returnBooksList(cursor);
         close();
         cursor.close();
@@ -65,7 +61,6 @@ public class TextCellDataSource {
         Cursor cursor = database.rawQuery("select * from categories order by _id",
                 null);
 
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
         List<CategoryModel> categories = DataBaseHelper.returnCaregoriesList(cursor);
         close();
         cursor.close();
@@ -82,7 +77,6 @@ public class TextCellDataSource {
         Cursor cursor = database.rawQuery("select * from books WHERE " + DataBaseHelper.PUBLISHER + "=" + publisher + " order by _id",
                 null);
 
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
         List<BookModel> books = DataBaseHelper.returnBooksList(cursor);
         close();
         cursor.close();
@@ -98,7 +92,6 @@ public class TextCellDataSource {
         open();
         Cursor cursor = database.rawQuery(
                 "select * from books WHERE is_faved = 1 order by _id", null);
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
         List<BookModel> books = DataBaseHelper.returnBooksList(cursor);
         close();
         cursor.close();
@@ -109,7 +102,6 @@ public class TextCellDataSource {
     /**
      * get list pair list of fieldsName/fieldsValue to search in db
      *
-     * @param title
      * @param fields
      * @return
      */
@@ -123,7 +115,6 @@ public class TextCellDataSource {
         sb.append(" order by _id");
 
         Cursor cursor = database.rawQuery(sb.toString(), null);
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
         List<BookModel> books = DataBaseHelper.returnBooksList(cursor);
         close();
         cursor.close();
@@ -131,9 +122,8 @@ public class TextCellDataSource {
     }
 
     /**
-     * get list pair list of fieldsName/fieldsValue to search in db
+     * get list pair list of fieldsName/fieldsValue to search in db and is_faved=1
      *
-     * @param title
      * @param fields
      * @return
      */
@@ -150,7 +140,6 @@ public class TextCellDataSource {
         sb.append(" AND is_faved = 1 order by _id");
 
         Cursor cursor = database.rawQuery(sb.toString(), null);
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
         List<BookModel> books = DataBaseHelper.returnBooksList(cursor);
         close();
         cursor.close();
@@ -169,8 +158,6 @@ public class TextCellDataSource {
         Cursor cursor = database.rawQuery("select * from books where _id=" + id,
                 null);
 
-        MTools.mlog("Returned " + cursor.getCount() + " rows.");
-
         BookModel book = null;
 
         if (cursor.getCount() > 0) {
@@ -178,7 +165,6 @@ public class TextCellDataSource {
                 book = DataBaseHelper.setBookCurserIntoObject(cursor);
             }
         } else {
-            MTools.mlog("no DATA returend!");
         }
 
         close();
@@ -201,7 +187,7 @@ public class TextCellDataSource {
     }
 
     /**
-     * remove books from faved list
+     * remove books from favorite list
      *
      * @param id
      * @return
