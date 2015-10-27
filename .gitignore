@@ -24,6 +24,7 @@ gen/
 build/
 
 # keystore file
+/keystore
 keystore/
 *.jks
 
