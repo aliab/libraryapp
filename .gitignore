@@ -25,6 +25,7 @@ build/
 
 # keystore file
 keystore/
+*.jks
 
 # Local configuration file (sdk path, etc)
 local.properties
