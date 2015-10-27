@@ -7,8 +7,6 @@ you can see demo at:
 #Screenshot
 
 ![Preview](https://dl.dropboxusercontent.com/u/34047574/github/librarydemo/shots0.jpg)
-![Preview](https://dl.dropboxusercontent.com/u/34047574/github/librarydemo/shots1.jpg)
-![Preview](https://dl.dropboxusercontent.com/u/34047574/github/librarydemo/shots2.jpg)
 
 License
 -------
