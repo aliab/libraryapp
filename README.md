@@ -1,4 +1,4 @@
-# libraryapp
+# Library Application
 This is just a simple demo of library open source application with live search feature and SQLite support.
 
 you can see demo at:
