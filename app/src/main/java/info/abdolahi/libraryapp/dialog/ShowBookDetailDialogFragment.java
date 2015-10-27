@@ -11,8 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.List;
-
 import butterknife.ButterKnife;
 import info.abdolahi.libraryapp.R;
 import info.abdolahi.libraryapp.db.BookModel;
@@ -22,7 +20,6 @@ public class ShowBookDetailDialogFragment extends DialogFragment {
 
     faveMeDialogListener mCallback;
     Context mContext;
-    List<String> realFontList;
 
     /**
      * interface for remote call
@@ -56,7 +53,7 @@ public class ShowBookDetailDialogFragment extends DialogFragment {
             mCallback = (faveMeDialogListener) mContext;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement CityChooserDialogListener.");
+                    + " must implement faveMeDialogListener.");
         }
 
     }
