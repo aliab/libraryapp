@@ -1,5 +1,5 @@
 # Library Application
-This is just a simple demo of library open source application with live search feature and SQLite support.
+This is just a simple demo of a library application with live search feature and SQLite support.
 
 you can see demo at:
 [Google Play](https://play.google.com/store/apps/details?id=info.abdolahi.libraryapp)
